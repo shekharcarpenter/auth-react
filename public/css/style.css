@@ -528,7 +528,7 @@ text-align: center;
   margin-left: 10px;
 }
 .custom_height{
-  max-height:200px; overflow:auto;
+  max-height:300px; overflow:auto;
 }
 .bg-disabled{
     background: #aaaaaa !important;
@@ -537,4 +537,21 @@ text-align: center;
 
     text-align: center;
     padding-top: 20px;
+}
+.pag_btn{
+  background: #aaaaaa;
+  padding: 5px  10px 5px 10px;
+  margin-top: 20px;
+  border: 3px solid white;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.textContent span {
+  color: #9a9ae1;
+  font-size: 16px;
+
+}
+.textContent {
+  margin-top: 15px;
 }
