@@ -105,30 +105,4 @@ export default class API {
         }
     }
 
-
-    async PatchApi(data, url) {
-        let token = localStorage.getItem('token')
-        try {
-            let response = axios.post(
-                this.baseUrl + url,
-                data,
-                {
-                    headers: {
-                        Authorization: 'Bearer ' + token
-                    }
-                }
-            )
-                .then((res) => {
-                    return res
-                })
-                .catch((error) => {
-                    return error
-                })
-            return response
-        } catch (error) {
-            return error
-        }
-
-    }
-
 };

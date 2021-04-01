@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import API from "../Services/API";
-// import Pagination from "react-js-pagination";
-// import Pagination from "../Navigations/pagination"
 
 
 class Step2 extends Component {
@@ -16,7 +14,7 @@ class Step2 extends Component {
             submit_disable: false,
             isLoading: false,
             currentPage: 1,
-            todosPerPage: 3,
+            todosPerPage: 10,
             todos: ['a','b'],
         }
 
@@ -32,12 +30,7 @@ class Step2 extends Component {
         });
     }
 
-    // handlePageChange(pageNumber) {
-    //     console.log(`active page is ${pageNumber}`);
-    //     this.setState({activePage: pageNumber});
-    // }
     onChangePage(skills) {
-        // update state with new page of items
         this.setState({skills: skills});
     }
 
@@ -49,20 +42,19 @@ class Step2 extends Component {
         this.api.GetApi(url)
             .then(res => {
                 if (res.request.status === 200) {
-                    // this.props.history.push('/skills')
                     let response_data = JSON.parse(res.request.response)
-                    console.log("999999999999999999999999999999", res.data)
                     this.setState({
                         skills: response_data,
                         isLoading: true
                     })
+                    var list_data = [];
                     for (let i=0; i <= (response_data).length - 1; i++) {
-                        this.setState({
-                            todos: this.state.selected_skills.concat(response_data[i]['skillName'])
-                        })
-                        console.log(response_data[i]['skillName'])
-                        console.log(this.state.todos)
+                        list_data.push(response_data[i]['skillName'])
                     }
+                    this.setState({
+                        todos: list_data
+                    })
+
 
                 } else {
                     let err = JSON.parse(res.request.response)
@@ -88,10 +80,6 @@ class Step2 extends Component {
             this.setState({
                 selected_skills: this.state.selected_skills.concat(value)
             }, this.count_input)
-
-
-            // this.state.selected_skills[value] = value;
-            console.log("++++++++++++", this.state.selected_skills)
         } else {
 
             var index = (this.state.selected_skills).indexOf(value);
@@ -99,7 +87,6 @@ class Step2 extends Component {
                 (this.state.selected_skills).splice(index, 1);
                 this.count_input()
             }
-            // this.state.selected_skills.splice(value, 1);
 
         }
 
@@ -127,23 +114,19 @@ class Step2 extends Component {
         }
 
         let url = 'user/skills'
-        console.log("_____________________", data)
 
         this.api.AuthPostApi(data, url)
             .then(res => {
                 if (res.request.status === 201) {
                     this.props.history.push('/dashboard')
-                    // alert("success")
+                    alert("Add skills Successfully")
                 } else if (res.request.status === 401) {
                     this.props.history.push('/signin')
                 } else {
                     let err = JSON.parse(res.request.response)
-                    console.log("=======================", res.request.status)
                     window.alert(err['message'])
                 }
             }).catch(error => {
-            console.log("_____________________", error)
-            window.alert('server error contact to administration+++++++++++')
         });
 
         console.warn(this.state)
@@ -153,20 +136,25 @@ class Step2 extends Component {
 
 
     render() {
-        // const { todos, currentPage, todosPerPage } = this.state;
         const todos = this.state.todos
         const currentPage = this.state.currentPage
         const todosPerPage = this.state.todosPerPage
-        // Logic for displaying todos
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
         const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
 
         const renderTodos = currentTodos.map((todo, index) => {
-            return <li key={index}>{todo}</li>;
+            return <>
+                        <span className={'singleSkill'}>
+                    <input type="checkbox" value={todo}
+                           onChange={this.handleInputChange}/>
+                    <span className={"skillValue"}>
+                    {todo}
+                    </span>
+                </span>
+            </>;
         });
 
-        // Logic for displaying page numbers
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(todos.length / todosPerPage); i++) {
             pageNumbers.push(i);
@@ -178,7 +166,7 @@ class Step2 extends Component {
 
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-                <li
+                <li className="pag_btn"
                     key={number}
                     id={number}
                     onClick={this.handleClick}
@@ -192,38 +180,17 @@ class Step2 extends Component {
         return (
             <>
 
-                <div>
-                    <ul>
-                        {/*{renderTodos}*/}
-                    </ul>
-                    {/*<ul id="page-numbers">*/}
-                    {/*    {renderPageNumbers}*/}
-                    {/*</ul>*/}
-                </div>
-                <div className={'page-container'}>
-                    <h2>Select Skills</h2>
-                </div>
-
                 {isLoading ? (
                     <div className={"container"}>
                         <div className={"row"}>
                             <div className={"col-md-12"}>
-
                                 <div className="limiter">
                                     <div className="container-login100 ">
                                         <div className="wrap-login100  custom_body">
 
                                             <div className="login100-form validate-form ">
+                                                <span className="login100-form-title ">Select Skills</span>
                                                 <div className="custom_height">
-                                                    {/*{this.state.skills.map(skill =>*/}
-                                                    {/*        <span className={'singleSkill'}>*/}
-                                                    {/*    <input type="checkbox" value={skill.skillName}*/}
-                                                    {/*           onChange={this.handleInputChange}/>*/}
-                                                    {/*    <span className={"skillValue"}>*/}
-                                                    {/*    {skill.skillName}*/}
-                                                    {/*    </span>*/}
-                                                    {/*</span>*/}
-                                                    {/*)}*/}
                                                     {renderTodos}
                                                 </div>
                                                 {/*<Pagination items={this.state.skills} onChangePage={this.onChangePage} />*/}

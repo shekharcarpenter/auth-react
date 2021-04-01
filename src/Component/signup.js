@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import SigninApi from "../Services/signinservices";
 import API from "../Services/API";
 
 class Signup extends Component {
@@ -54,13 +53,11 @@ class Signup extends Component {
         }
 
         let url = 'user/signup'
-        console.log("_____________________",data)
         this.api.PostApi(data, url)
             .then(res => {
                 if (res.request.status === 201) {
 
                     let url = 'user/signin'
-                    console.log("_____________________",data)
                     this.api.PostApi(data, url)
                         .then(res => {
                             let err = JSON.parse(res.request.response)
@@ -84,7 +81,7 @@ class Signup extends Component {
                 }
             }).catch(error => {
             console.log("_____________________",error)
-            window.alert('server error contact to administration+++++++++++') //todo : error message
+            window.alert('Connection error try again letter')
         });
     }
 
@@ -104,8 +101,6 @@ class Signup extends Component {
                                        placeholder="Enter email address." value={this.state.username}
                                        onChange={this.usernameChangeHandler}/>
                                 <span className="focus-input100 " data-symbol="	&#xf007;"/>
-                                {/*{this.state.error_password}</span>*/}
-
 
                                 {this.state.form_errors.username ? (
                                     this.state.form_errors.username.map(error => (

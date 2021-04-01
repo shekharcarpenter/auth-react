@@ -51,21 +51,17 @@ class Step1 extends Component {
         }
 
         let url = 'user/basic/profile'
-        console.log("_____________________", data)
-
             this.api.AuthPostApi(data, url)
                 .then(res => {
                     if (res.request.status === 201) {
                         this.props.history.push('/step2')
-                        // alert("success")
                     } else {
                         let err = JSON.parse(res.request.response)
-                        console.log("=======================", res.request.status)
                         window.alert(err['message'])
                     }
                 }).catch(error => {
-                console.log("_____________________", error)
-                window.alert('server error contact to administration+++++++++++') //todo : error message
+                console.log("_____________________",error)
+                window.alert('Connection error try again letter')
             });
         }
 
@@ -73,9 +69,6 @@ class Step1 extends Component {
     render() {
         return (
             <>
-            <div className={'page-container'}>
-                <h2>Update Profile</h2>
-            </div>
             <div className={"container"}>
                 <div className={"row"}>
                     <div className={"col-md-12"}>
@@ -85,21 +78,13 @@ class Step1 extends Component {
                                 <div className="wrap-login100" >
 
                                     <div className="login100-form validate-form" onSubmit={this.update_event}>
+                                        <span className="login100-form-title ">Update Profile</span>
                                         <div className="wrap-input100 validate-input ">
                                             <span className="label-input100">First Name</span>
                                             <input className="input100" type="text" name="first_name"
                                                    placeholder="First Name" value={this.state.first_name}
                                                    onChange={this.firstNameChangeHandler}/>
                                             <span className="focus-input100 " data-symbol="	&#xf007;"/>
-                                            {/*{this.state.error_password}</span>*/}
-
-
-                                            {/*{this.state.form_errors.username ? (*/}
-                                            {/*    this.state.form_errors.username.map(error => (*/}
-                                            {/*        <span className="error_out">{error} </span>*/}
-                                            {/*    ))*/}
-                                            {/*) : null}*/}
-
                                         </div>
 
 
@@ -109,11 +94,6 @@ class Step1 extends Component {
                                                    placeholder="Last Name" value={this.state.last_name}
                                                    onChange={this.lastNameChangeHandler}/>
                                             <span className="focus-input100" data-symbol="&#xf007;"/>
-                                            {/*{this.state.form_errors.password ? (*/}
-                                            {/*    this.state.form_errors.password.map(error => (*/}
-                                            {/*        <span className="error_out">{error} </span>*/}
-                                            {/*    ))*/}
-                                            {/*) : null}*/}
                                         </div>
 
                                         <div className="container-login100-form-btn">
