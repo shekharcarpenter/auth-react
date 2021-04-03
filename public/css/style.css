@@ -17,7 +17,7 @@
 }
 
 body, html {
-  height: 100%;
+  width: 100%;
   font-family: 'Poppins', sans-serif;
   background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
   /*background-image: linear-gradient(#58C9E0, #8369F0, #DA1DFA);*/
@@ -472,15 +472,6 @@ font-weight: 500;
 padding: 35px 57px 50px;
 }
 
-.thankyou{
-
-padding: 57px 0 37px;
-
-text-align: center;
-}
-.thankyou span{
-  
-}
 @media (max-width: 576px) {
   .wrap-login100 {
     padding-left: 15px;
@@ -515,37 +506,48 @@ text-align: center;
   cursor:pointer
 }
 .singleSkill{
-  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-  padding: 10px 20px;
+  background: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  padding: 5px 10px 10px 10px;
   border-radius: 5px;
   display: block;
   margin: 5px;
+  height: 40px;
+
 }
 .custom_body{
   padding:20px;
 }
 .skillValue{
-  margin-left: 10px;
+  padding-left: 10px;
+
 }
 .custom_height{
-  max-height:300px; overflow:auto;
+  max-height: 500px ;
+  overflow:auto;
+}
+.custom_height input {
+
 }
 .bg-disabled{
     background: #aaaaaa !important;
 }
 .page-container{
-
     text-align: center;
     padding-top: 20px;
 }
-.pag_btn{
+.pageNumber{
+/*background: red;*/
+}
+.pageList{
   background: #aaaaaa;
+  color:#ffffff;
   padding: 5px  10px 5px 10px;
   margin-top: 20px;
   border: 3px solid white;
-  border-radius: 50px;
+  border-radius: 50%;
   cursor: pointer;
 }
+
 
 .textContent span {
   color: #9a9ae1;
