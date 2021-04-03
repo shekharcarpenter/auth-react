@@ -15,7 +15,7 @@ class Step2 extends Component {
             isLoading: false,
             currentPage: 1,
             todosPerPage: 10,
-            todos: ['a','b'],
+            todos: [],
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,6 +25,11 @@ class Step2 extends Component {
     }
 
     handleClick(event) {
+        let getClassName = document.getElementsByClassName("pageList");
+        for (let i =1; i<=getClassName.length; i++){
+            document.getElementById(i).style.background = "#aaaaaa";
+        }
+        document.getElementById(event.target.id).style.background = "#a64bf4";
         this.setState({
             currentPage: Number(event.target.id)
         });
@@ -48,7 +53,7 @@ class Step2 extends Component {
                         isLoading: true
                     })
                     var list_data = [];
-                    for (let i=0; i <= (response_data).length - 1; i++) {
+                    for (let i = 0; i <= (response_data).length - 1; i++) {
                         list_data.push(response_data[i]['skillName'])
                     }
                     this.setState({
@@ -62,8 +67,8 @@ class Step2 extends Component {
                     window.alert(err['message'])
                 }
             }).catch(error => {
-            console.log("_____________________", error)
-            window.alert('server error contact to administration+++++++++++')
+            console.log(error)
+            window.alert('Connection error try again letter')
         });
     }
 
@@ -71,16 +76,18 @@ class Step2 extends Component {
     handleInputChange(event) {
 
         const target = event.target;
-        console.log("++++++++++++", target.value)
 
         var value = target.value;
 
 
         if (target.checked) {
+            console.log(target,"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            document.getElementById(event.target.id).style.background = "#a64bf4";
             this.setState({
                 selected_skills: this.state.selected_skills.concat(value)
             }, this.count_input)
         } else {
+            document.getElementById(event.target.id).style.background = "red";
 
             var index = (this.state.selected_skills).indexOf(value);
             if (index > -1) {
@@ -145,10 +152,12 @@ class Step2 extends Component {
 
         const renderTodos = currentTodos.map((todo, index) => {
             return <>
-                        <span className={'singleSkill'}>
+                        <span className="singleSkill">
                     <input type="checkbox" value={todo}
+                           key={todo}
+                           id={todo}
                            onChange={this.handleInputChange}/>
-                    <span className={"skillValue"}>
+                    <span className="skillValue">
                     {todo}
                     </span>
                 </span>
@@ -161,18 +170,19 @@ class Step2 extends Component {
         }
 
 
+
         const isSubmit = this.state.submit_disable;
         const isLoading = this.state.isLoading;
 
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-                <li className="pag_btn"
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}
-                >
-                    {number}
-                </li>
+                    <li className="pageList"
+                        key={number}
+                        id={number}
+                        onClick={this.handleClick}
+                    >
+                        {number}
+                    </li>
             );
         });
 

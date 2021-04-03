@@ -70,17 +70,16 @@ class Signup extends Component {
                                 window.alert('Connection failed')
                             }
                         }).catch(error => {
+                            console.error(error)
                         window.alert('Connection failed, try again ')
                     });
 
 
                 } else {
                     let err = JSON.parse(res.request.response)
-                    console.log("=======================",res.request.status)
                     window.alert(err['message'])
                 }
             }).catch(error => {
-            console.log("_____________________",error)
             window.alert('Connection error try again letter')
         });
     }

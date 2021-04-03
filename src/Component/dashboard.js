@@ -8,23 +8,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             data: [],
-            publicId: "",
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: "",
-            salt: "",
-            profileCompleted: true,
-            skills: [
-                "Typescript",
-                "NestJS",
-                "ExpressJS",
-                "AngularJS",
-                "Typescript",
-                "ReactJS",
-                "ExpressJS",
-                "AngularJS"
-            ],
+            isLoading: false,
             skill_data:[]
         }
         this.user_event()
@@ -41,6 +25,7 @@ class Dashboard extends Component {
                     let response_data = JSON.parse(res.request.response)
                     this.setState({
                         data: response_data,
+                        isLoading: true,
                     })
                 } else {
                     let err = JSON.parse(res.request.response)
@@ -52,9 +37,11 @@ class Dashboard extends Component {
     }
 
     render() {
+        const isLoading = this.state.isLoading;
 
         return (
             <>
+                {isLoading ? (
                 <div className={"container"}>
                     <div className={"row"}>
                         <div className={"col-md-12"}>
@@ -108,6 +95,7 @@ class Dashboard extends Component {
                         </div>
                     </div>
                 </div>
+                ) : ('')}
             </>
         );
     }
