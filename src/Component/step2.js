@@ -24,9 +24,9 @@ class Step2 extends Component {
         this.skill_event()
     }
 
-    handleClick(event) {
+    handleClick = (event) =>{
         let getClassName = document.getElementsByClassName("pageList");
-        for (let i =1; i<=getClassName.length; i++){
+        for (let i = 1; i <= getClassName.length; i++) {
             document.getElementById(i).style.background = "#aaaaaa";
         }
         document.getElementById(event.target.id).style.background = "#a64bf4";
@@ -40,7 +40,6 @@ class Step2 extends Component {
     }
 
     skill_event(event) {
-
 
         let url = 'skills'
 
@@ -73,21 +72,15 @@ class Step2 extends Component {
     }
 
 
-    handleInputChange(event) {
-
-        const target = event.target;
-
-        var value = target.value;
-
+    handleInputChange = (event) => {
+        let target = event.target.checked;
+        var value = event.target.value;
 
         if (target.checked) {
-            console.log(target,"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-            document.getElementById(event.target.id).style.background = "#a64bf4";
             this.setState({
                 selected_skills: this.state.selected_skills.concat(value)
             }, this.count_input)
         } else {
-            document.getElementById(event.target.id).style.background = "red";
 
             var index = (this.state.selected_skills).indexOf(value);
             if (index > -1) {
@@ -155,8 +148,8 @@ class Step2 extends Component {
                         <span className="singleSkill">
                     <input type="checkbox" value={todo}
                            key={todo}
-                           id={todo}
-                           onChange={this.handleInputChange}/>
+                           id={todo.slice(-6, -1)}
+                           onChange={event => this.handleInputChange(event)}/>
                     <span className="skillValue">
                     {todo}
                     </span>
@@ -170,19 +163,18 @@ class Step2 extends Component {
         }
 
 
-
         const isSubmit = this.state.submit_disable;
         const isLoading = this.state.isLoading;
 
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-                    <li className="pageList"
-                        key={number}
-                        id={number}
-                        onClick={this.handleClick}
-                    >
-                        {number}
-                    </li>
+                <li className="pageList"
+                    key={number}
+                    id={number}
+                    onClick={this.handleClick}
+                >
+                    {number}
+                </li>
             );
         });
 
@@ -203,7 +195,6 @@ class Step2 extends Component {
                                                 <div className="custom_height">
                                                     {renderTodos}
                                                 </div>
-                                                {/*<Pagination items={this.state.skills} onChangePage={this.onChangePage} />*/}
 
                                                 <div className="container-login100-form-btn">
                                                     {renderPageNumbers}

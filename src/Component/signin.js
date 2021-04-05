@@ -36,13 +36,11 @@ class Signin extends Component {
 
     }
 
-    resetFormErrors(input_to_reset) {
+    resetFormErrors(event) {
         let formErrors = this.state.form_errors
-        formErrors[input_to_reset] = null
+        formErrors[event] = null
         this.setState({form_errors: formErrors});
         console.log(this.state.form_errors)
-
-
     }
 
 
