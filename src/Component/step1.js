@@ -94,7 +94,7 @@ class Step1 extends Component {
                                                 <input className="input100" type="text" name="last_name"
                                                        placeholder="Last Name" value={this.state.last_name}
                                                        onChange={this.lastNameChangeHandler}/>
-                                                <a className="focus-input100" data-symbol="&#xf007;"/>
+                                                <span className="focus-input100" data-symbol="&#xf007;"/>
                                             </div>
 
                                             <div className="container-login100-form-btn">

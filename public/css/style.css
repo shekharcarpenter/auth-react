@@ -19,8 +19,19 @@
 body, html {
   width: 100%;
   font-family: 'Poppins', sans-serif;
-  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-  /*background-image: linear-gradient(#58C9E0, #8369F0, #DA1DFA);*/
+  background-image: linear-gradient(to right top,
+  #d16ba5,
+  #c777b9,
+  #ba83ca,
+  #aa8fd8,
+  #9a9ae1,
+  #8aa7ec,
+  #79b3f4,
+  #69bff8,
+  #52cffe,
+  #41dfff,
+  #46eefa,
+  #5ffbf1);
 }
 
 /*---------------------------------------------*/
@@ -108,6 +119,7 @@ button {
 
 button:hover {
   cursor: pointer;
+    /*background: #a64bf4;*/
 }
 
 iframe {
