@@ -11,7 +11,7 @@ class Step2 extends Component {
         this.state = {
             skills: [],
             selected_skills: [],
-            submit_disable: false,
+            activeSubmit: false,
             isLoading: false,
             currentPage: 1,
             todosPerPage: 10,
@@ -29,10 +29,13 @@ class Step2 extends Component {
         for (let i = 1; i <= getClassName.length; i++) {
             document.getElementById(i).style.background = "#aaaaaa";
         }
+        console.log('------------------------',getClassName)
         document.getElementById(event.target.id).style.background = "#a64bf4";
         this.setState({
             currentPage: Number(event.target.id)
         });
+        console.log('------------------+++++++++++++++++------',this.state.currentPage)
+
     }
 
     onChangePage(skills) {
@@ -51,14 +54,13 @@ class Step2 extends Component {
                         skills: response_data,
                         isLoading: true
                     })
-                    var list_data = [];
+                    const list_data = [];
                     for (let i = 0; i <= (response_data).length - 1; i++) {
                         list_data.push(response_data[i]['skillName'])
                     }
                     this.setState({
                         todos: list_data
                     })
-
 
                 } else {
                     let err = JSON.parse(res.request.response)
@@ -74,15 +76,16 @@ class Step2 extends Component {
 
     handleInputChange = (event) => {
         let target = event.target.checked;
-        var value = event.target.value;
-
+        const value = event.target.value;
+        console.log(target, '++++++++++++++++++++', value)
         if (target.checked) {
             this.setState({
                 selected_skills: this.state.selected_skills.concat(value)
             }, this.count_input)
+            console.log('--------+------+*---+-', this.count_input)
         } else {
 
-            var index = (this.state.selected_skills).indexOf(value);
+            const index = (this.state.selected_skills).indexOf(value);
             if (index > -1) {
                 (this.state.selected_skills).splice(index, 1);
                 this.count_input()
@@ -95,13 +98,15 @@ class Step2 extends Component {
     count_input() {
         let options = this.state.selected_skills
         if (options.length >= 3 && options.length <= 8) {
+            console.log("-------------------",this.state.options)
             this.setState({
-                submit_disable: true
+                activeSubmit: true
             })
+
 
         } else {
             this.setState({
-                submit_disable: false
+                activeSubmit: false
             })
         }
 
@@ -163,7 +168,7 @@ class Step2 extends Component {
         }
 
 
-        const isSubmit = this.state.submit_disable;
+        const isSubmit = this.state.activeSubmit;
         const isLoading = this.state.isLoading;
 
         const renderPageNumbers = pageNumbers.map(number => {
